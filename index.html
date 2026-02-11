@@ -1,0 +1,1143 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Un pequeño detallito 💕</title>
+    <style>
+      /* Solo estilos mínimos necesarios para que los elementos base funcionen */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background-color: #1a1c24;
+        color: #fff;
+        font-size: 1rem;
+        line-height: 1.4;
+        -webkit-font-smoothing: subpixel-antialiased;
+      }
+
+      /* El skip button necesita estar visible desde el inicio */
+      .skip-link {
+        position: fixed;
+        left: 30px;
+        bottom: 20px;
+        color: #666;
+        text-decoration: none;
+        font-size: 14px;
+        cursor: pointer;
+        z-index: 101;
+        transition: color 0.3s;
+        font-family: monospace;
+      }
+
+      .skip-link:hover {
+        color: #c66c75;
+      }
+
+      /* OCULTAR TODOS LOS ELEMENTOS HASTA QUE EL CSS LOS MUESTRE */
+      #ecg-container,
+      #echo,
+      #heart,
+      #polaroid-gallery,
+      #music-player {
+        display: none !important;
+      }
+
+      pre {
+        position: fixed;
+        top: 30px;
+        bottom: 30px;
+        left: 6%;
+        right: 6%;
+        overflow: auto;
+        background-color: #313744;
+        color: #a6c3d4;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        padding: 24px 12px;
+        box-sizing: border-box;
+        border-radius: 3px;
+        box-shadow: 0px 4px 0px 2px rgba(0, 0, 0, 0.1);
+        /* Ocultar barra de scroll pero mantener funcionalidad */
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* IE y Edge */
+      }
+
+      /* Webkit (Chrome, Safari, Opera) */
+      pre::-webkit-scrollbar {
+        display: none;
+        width: 0;
+        height: 0;
+      }
+
+      @media screen and (min-width: 768px) {
+        pre {
+          width: 48%;
+          left: 50%;
+          right: auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <style id="style-tag"></style>
+
+    <div id="ecg-container">
+      <div id="ecg-line"></div>
+      <svg class="ecg-pulse" viewBox="0 0 600 200" preserveAspectRatio="none">
+        <path id="ecg-path" d="M0,100 L0,100" />
+      </svg>
+    </div>
+
+    <span id="echo"></span>
+    <span id="heart"><i></i></span>
+
+    <div id="polaroid-gallery">
+      <div class="polaroid" data-index="0">
+        <img src="photo1.jpg" alt="Foto 1" />
+        <div class="polaroid-caption">Tomando te macho</div>
+      </div>
+      <div class="polaroid" data-index="1">
+        <img src="photo2.jpg" alt="Foto 2" />
+        <div class="polaroid-caption">Por qué todo es tomar?</div>
+      </div>
+      <div class="polaroid" data-index="2">
+        <img src="photo3.jpg" alt="Foto 3" />
+        <div class="polaroid-caption">Día de jalouin</div>
+      </div>
+      <div class="polaroid" data-index="3">
+        <img src="photo4.jpg" alt="Foto 4" />
+        <div class="polaroid-caption">Mejor una foto tuya xd</div>
+      </div>
+      <button class="polaroid-nav polaroid-nav-prev" id="polaroid-prev">
+        ‹
+      </button>
+      <button class="polaroid-nav polaroid-nav-next" id="polaroid-next">
+        ›
+      </button>
+    </div>
+
+    <pre id="style-text"></pre>
+
+    <div id="music-player">
+      <button class="player-btn" id="prev-btn">⏮</button>
+      <button class="player-btn" id="play-btn">▶</button>
+      <button class="player-btn" id="next-btn">⏭</button>
+      <div id="song-title">Selecciona una canción</div>
+      <div class="volume-control">
+        <span style="font-size: 14px">🔊</span>
+        <input type="range" id="volume-slider" min="0" max="100" value="70" />
+      </div>
+    </div>
+
+    <audio id="audio-player"></audio>
+
+    <a class="skip-link" id="skipAnimation">Saltar intro xd</a>
+
+    <script>
+      // ====================
+      // CSS COMPLETO PARA COMPILAR
+      // ====================
+      const styles = `/*
+ * "Un pequeño detallito <3"
+ * "2026-02-14"
+ */
+
+/*
+ * ...¿hola?
+ * ¡Hola a Luz! ¡Soy  ̶K̶e̶n̶y̶! Wendel xd
+ * Se acerca San Valentín y no sabía que regalarte 
+ * o si tan solo recibirías regalo :D
+ * Así que decidí hacer algo especial para ti~
+ * hecho con código y mucho cariño.
+ * Y a falta de animación, será entretenido que veas
+ * lo que realmente se hace al digitar código ajsdjsadj
+ * que lo disfruteeeeeees !! 
+ * Primero, hagamos un buen formato
+ * para el código xd 
+ */
+
+pre em:not(.comment) { font-style: normal; }
+
+.comment       { color: #707e84; }
+.selector      { color: #c66c75; }
+.selector .key { color: #c66c75; }
+.key           { color: #c7ccd4; }
+.value         { color: #d5927b; }
+
+@media screen and (max-width: 768px) {
+    pre { left: 6%;right: 6%;top: 50%; }
+}
+
+@media screen and (min-width: 768px) {
+    pre { width: 48%;left: 50%;bottom: 30px; }
+}
+
+/*
+ * ¡Espera otra vez ! xxxdxd
+ * olvidé que programar podría aburrirte
+ * mejor sólo resaltemos los mensajes
+ */
+
+pre em:not(.comment) { 
+  font-style: normal; 
+  opacity: 1;  
+  filter: blur(0px); 
+  transition: opacity 0.3s ease;
+}
+.comment { 
+  color: #ffb6c1;  
+  opacity: 1 !important; 
+  font-weight: 500; 
+  text-shadow: 0 0 10px rgba(255, 182, 193, 0.3); 
+  background: rgba(255, 182, 193, 0.1); 
+  padding: 2px 4px;
+  border-radius: 3px;
+  display: inline-block;
+}
+
+.selector      { color: #707e84; }
+.selector .key { color: #707e84; }
+.key           { color: #707e84; }
+.value         { color: #707e84; }
+
+
+/*
+ * ¡ESTO ES LO QUE IMPORTA! 
+ * ahora si no hay excusas de no entiendo nadaaa xd
+ * primero, se te puede hacer aburrido esperar 
+ * a que escriba todo el código
+ * ... ya sé. escucha algo de tu música mientras
+ * escribo el resto
+ */
+
+ /*
+ * Ahora el reproductor de música~
+ * ¡Para que escuches tus canciones favoritas! 🎵
+ */
+/* -------------------------------*/
+ 
+#music-player {
+  display: flex !important;
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background: rgba(49, 55, 68, 0.95);
+  padding: 12px 20px;
+  border-radius: 25px;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  z-index: 100;
+  opacity: 0;
+  transition: opacity 1.5s ease-in;
+  backdrop-filter: blur(10px);
+}
+
+.player-btn {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: 50%;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.player-btn:hover {
+  background: rgba(198, 108, 117, 0.3);
+  transform: scale(1.1);
+}
+
+#song-title {
+  color: #a6c3d4;
+  font-size: 13px;
+  min-width: 150px;
+  text-align: center;
+  font-family: 'Courier New', monospace;
+}
+
+.volume-control {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+#volume-slider {
+  width: 70px;
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255,255,255,0.2);
+  outline: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+}
+ /*
+ * No conseguiste darle play? xd
+ * ¡No te preocupes! en un toque lo arreglo
+ */
+/* -------------------------------*/
+#volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #c66c75;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  #music-player {
+    top: 10px;
+    left: 120px;
+    padding: 10px 15px;
+    gap: 8px;
+  }
+  .volume-control {
+    display: none;
+  }
+  #song-title {
+    min-width: 100px;
+    font-size: 11px;
+  }
+  .player-btn {
+    font-size: 16px;
+    padding: 5px 8px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+    #music-player {
+    top: 30px;
+    left: 300px;
+    padding: 10px 15px;
+    gap: 8px;
+  }
+  #song-title {
+    min-width: 100px;
+    font-size: 11px;
+  }
+  .player-btn {
+    font-size: 16px;
+    padding: 5px 8px;
+  }
+}
+
+/*
+ * Y la música comienza a sonar~ 
+ */
+
+#music-player {
+  opacity: 1;
+}
+
+/*
+* No sonó? jasjdas lo siento
+* tienes que darle play . . .
+ * No seas tímida, dale play gogo~ 
+ */
+/* -------------------------------*/
+/*
+ * ¡Hagamos un pequeño corazón con código!
+ */
+ /* -------------------------------*/
+@media screen and (max-width: 768px) {
+    #heart, #echo {
+        display: block !important;
+        position: fixed;
+        width: 300px; height: 300px;
+        margin: 30px auto;
+        left: 0; right: 0;
+        text-align: center;
+        -webkit-transform: scale(0.95);
+        transform: scale(0.95);
+    }
+}
+
+@media screen and (min-width: 768px) {
+    #heart, #echo {
+      display: block !important;
+      position: fixed;
+      width: 300px; height: 300px;
+      top: calc(35% - 150px); left: calc(25% - 150px);
+      text-align: center;
+      -webkit-transform: scale(0.95);
+              transform: scale(0.95);
+    }
+}
+
+#heart { z-index: 8; }
+#echo  { z-index: 7; }
+
+/*
+ * Preparando el fondo para el electrocardiograma~
+ * ¡Vamos a darle vida a este corazón!
+ */
+ /* -------------------------------*/
+#ecg-container {
+  display: block !important;
+  position: fixed;
+  width: 600px; height: 200px;
+  top: calc(35% - 100px);
+  left: calc(25% - 300px);
+  z-index: 5;
+  opacity: 0;
+  transition: opacity 2s ease-in;
+  pointer-events: none;
+}
+
+@media screen and (max-width: 768px) {
+  #ecg-container {
+    width: 100%;
+    left: 0;
+    top: 15%;
+    height: 150px;
+  }
+}
+
+#ecg-line {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: rgba(198, 108, 117, 0.2);
+}
+
+.ecg-pulse {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.ecg-pulse path {
+  stroke: rgba(198, 108, 117, 0.5);
+  stroke-width: 2;
+  fill: none;
+  filter: drop-shadow(0 0 3px rgba(198, 108, 117, 0.3));
+}
+
+#heart::before, #heart::after, #echo::before, #echo::after {
+    content: '';
+    position: absolute;
+    top: 40px;
+    width: 150px; height: 240px;
+    background: #c66c75;
+    border-radius: 150px 150px 0 0;
+    -webkit-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+    -webkit-transform-origin: 0 100%;
+            transform-origin: 0 100%;
+}
+
+#heart::before, #echo::before {
+  left: 150px;
+}
+
+#heart::after, #echo::after {
+  left: 0;
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+  -webkit-transform-origin: 100% 100%;
+          transform-origin: 100% 100%;
+}
+
+/* Añadamos un poco de sombra ww */
+
+#heart::after {
+  box-shadow:
+    inset -6px -6px 0px 6px rgba(255,255,255,0.1);
+}
+
+#heart::before {
+  box-shadow:
+    inset 6px 6px 0px 6px rgba(255,255,255,0.1);
+}
+
+/*
+ * Un corazón simple pero con mucho odio
+ *  ̶L̶u̶z̶c̶e̶l̶y̶   ̶P̶u̶c̶h̶e̶l̶y̶?̶   ̶A̶l̶e̶s̶s̶a̶n̶d̶r̶a̶?
+ * mejor Luz xd
+ */
+ /* -------------------------------*/
+
+#heart i::before {
+  content: 'Luz';
+  position: absolute;
+  z-index: 9;
+  width: 100%;
+  top: 35%; left: 0;
+  font-style: normal;
+  color: rgba(255,255,255,0.8);
+  font-weight: 100;
+  font-size: 30px;
+  text-shadow: -1px -1px 0px rgba(0,0,0,0.2);
+}
+
+/*
+ * Está muy frío xd si parece tu corazon
+ * ¡Hagamos que este corazón lata!
+ */
+/* -------------------------------*/
+@-webkit-keyframes heartbeat {
+  0%, 100% {
+    -webkit-transform: scale(0.95);
+            transform: scale(0.95);
+  }
+  50% {
+    -webkit-transform: scale(1.00);
+            transform: scale(1.00);
+  }
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(0.95); }
+  50%      { transform: scale(1.00); }
+}
+
+@-webkit-keyframes echo {
+  0%   {
+    opacity: 0.1;
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: scale(1.4);
+            transform: scale(1.4);
+  }
+}
+
+@keyframes echo {
+  0%   {
+    opacity: 0.1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.4);
+  }
+}
+
+/*
+ * ¡Bien! Ahora haremos que lata x2
+ */
+
+#heart, #echo {
+  -webkit-animation-duration: 2000ms;
+          animation-duration: 2000ms;
+  -webkit-animation-timing-function:
+    cubic-bezier(0, 0, 0, 1.74);
+          animation-timing-function:
+            cubic-bezier(0, 0, 0, 1.74);
+  -webkit-animation-delay: 500ms;
+          animation-delay: 500ms;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+  -webkit-animation-play-state: paused;
+          animation-play-state: paused;
+}
+
+#heart {
+  -webkit-animation-name: heartbeat;
+          animation-name: heartbeat;
+}
+#echo {
+  -webkit-animation-name: echo;
+          animation-name: echo;
+}
+
+
+
+
+/*
+ * revisando tu chat ...
+ */
+
+#heart, #echo {
+
+/*
+ * ...3...
+ *
+ * ...2...
+ *
+ * ...1...
+ *
+ * ¡ Luz respondió un mensaje! xd
+ *
+ */
+/* -------------------------------*/
+  -webkit-animation-play-state: running;
+          animation-play-state: running;
+
+/*
+ * ¡¡Aquí viene!
+ */
+
+}
+
+/*
+ * Ahora sí~ ¡todo cobra vida!
+ */
+
+#ecg-container {
+  opacity: 1;
+}
+
+
+/*
+ * ¡Ahora vienen las fotos!
+ * Recuerdos especiales en estilo Polaroid 
+ */
+/* -------------------------------*/
+#polaroid-gallery {
+  display: flex !important;
+  position: fixed;
+  bottom: 40px;
+  left: calc(25% - 200px);
+  width: 400px;
+  height: 180px;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  opacity: 0;
+  transition: opacity 2s ease-in;
+}
+
+@media screen and (max-width: 768px) {
+  #polaroid-gallery {
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    bottom: 20px;
+  }
+}
+
+.polaroid {
+  position: absolute;
+  width: 140px;
+  background: white;
+  padding: 12px;
+  bottom: 50px;
+  padding-bottom: 45px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  cursor: pointer;
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.polaroid img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  display: block;
+  background: #f0f0f0;
+}
+/*
+ * Ignora eso xdxd
+ */
+/* -------------------------------*/
+.polaroid-caption {
+  text-align: center;
+  margin-top: 8px;
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  color: #333;
+}
+
+.polaroid:nth-child(1) {
+  transform: rotate(-8deg) translateX(-60px);
+  z-index: 4;
+}
+
+.polaroid:nth-child(2) {
+  transform: rotate(-3deg) translateX(-20px);
+  z-index: 3;
+}
+
+.polaroid:nth-child(3) {
+  transform: rotate(2deg) translateX(20px);
+  z-index: 2;
+}
+
+.polaroid:nth-child(4) {
+  transform: rotate(7deg) translateX(60px);
+  z-index: 1;
+}
+
+.polaroid:hover {
+  z-index: 10 !important;
+  transform: scale(1.05) rotate(0deg) !important;
+}
+
+.polaroid.active {
+  z-index: 15 !important;
+  transform: scale(2.2) rotate(0deg) translateY(-80px) !important;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+}
+
+
+
+@media screen and (max-width: 768px) {
+  .polaroid {
+    width: 100px;
+    padding: 8px;
+    padding-bottom: 35px;
+  }
+  
+  .polaroid img {
+    height: 100px;
+  }
+  
+  .polaroid-caption {
+    font-size: 9px;
+    margin-top: 6px;
+  }
+  
+  .polaroid:nth-child(1) {
+    transform: rotate(-8deg) translateX(-40px);
+  }
+  
+  .polaroid:nth-child(2) {
+    transform: rotate(-3deg) translateX(-15px);
+  }
+  
+  .polaroid:nth-child(3) {
+    transform: rotate(2deg) translateX(15px);
+  }
+  
+  .polaroid:nth-child(4) {
+    transform: rotate(7deg) translateX(40px);
+  }
+  
+  .polaroid.active {
+    transform: scale(1.8) rotate(0deg) translateY(-60px) !important;
+  }
+}
+
+/*
+ * Botones de navegación para las fotos
+ */
+/* -------------------------------*/
+.polaroid-nav {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(198, 108, 117, 0.9);
+  border: none;
+  color: white;
+  font-size: 48px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s ease;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  line-height: 1;
+  padding: 0;
+}
+
+.polaroid-nav:hover {
+  background: rgba(198, 108, 117, 1);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.polaroid-nav-prev {
+  left: 20px;
+}
+
+.polaroid-nav-next {
+  right: 20px;
+}
+
+.polaroid-nav.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+@media screen and (max-width: 768px) {
+  .polaroid-nav {
+    width: 50px;
+    height: 50px;
+    font-size: 36px;
+  }
+  
+  .polaroid-nav-prev {
+    left: 10px;
+  }
+  
+  .polaroid-nav-next {
+    right: 10px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+    .polaroid-nav {
+    width: 50px;
+    height: 50px;
+    font-size: 36px;
+  }
+  
+  .polaroid-nav-prev {
+    left: 10px;
+  }
+  
+  .polaroid-nav-next {
+    right: 1000px;
+  }
+}
+
+/*
+ * ¡Ya están listas las fotos!
+ */
+
+#polaroid-gallery {
+  opacity: 1;
+}
+
+/*
+ * ¡asdasd
+ */
+
+/*
+ * Feliz San Valentín, Luz~ 
+ * Y baila si odias a keny xd
+ */`;
+
+      // ====================
+      // ANIMACIÓN CARÁCTER POR CARÁCTER
+      // ====================
+      let finalStyle = styles;
+      let openComment = false;
+      let isOn = true;
+      let compiledStyles = "";
+      let styleTag = document.getElementById("style-tag");
+      let styleText = document.getElementById("style-text");
+
+      const commentTime = 35; // Tiempo para comentarios (más lento para leer)
+      const codeTime = 0.2; // Tiempo para código
+
+      function writeStyleChar(char) {
+        // Detectar inicio de comentario
+        if (char === "/" && openComment === false) {
+          openComment = true;
+          compiledStyles += char;
+        }
+        // Detectar fin de comentario
+        else if (char === "/" && openComment === true) {
+          openComment = false;
+          compiledStyles = compiledStyles.replace(
+            /(\/[^\/]*\*)$/,
+            '<em class="comment">$1/</em>',
+          );
+        }
+        // Wrap style declaration
+        else if (char === ":") {
+          compiledStyles = compiledStyles.replace(
+            /([a-zA-Z- ^\n]*)$/,
+            '<em class="key">$1</em>:',
+          );
+        }
+        // Wrap style value
+        else if (char === ";") {
+          compiledStyles = compiledStyles.replace(
+            /([^:]*)$/,
+            '<em class="value">$1</em>;',
+          );
+        }
+        // Wrap selector
+        else if (char === "{") {
+          compiledStyles = compiledStyles.replace(
+            /([^\n]*)$/,
+            '<em class="selector">$1</em>{',
+          );
+        } else {
+          compiledStyles += char;
+        }
+
+        styleText.innerHTML = compiledStyles;
+        styleTag.textContent += char;
+      }
+
+      function writeStyles(message, index, interval) {
+        if (index < message.length && isOn) {
+          const pre = document.getElementById("style-text");
+          pre.scrollTop = pre.scrollHeight;
+
+          writeStyleChar(message[index]);
+          index++;
+
+          setTimeout(() => {
+            writeStyles(message, index, openComment ? commentTime : codeTime);
+          }, interval);
+        } else if (index >= message.length) {
+          // Cuando termine la animación, iniciar ECG
+          setTimeout(() => {
+            startECG();
+          }, 500);
+        }
+      }
+
+      function skip() {
+        isOn = false;
+        setTimeout(() => {
+          styleText.innerHTML = finalStyle;
+          styleTag.textContent = finalStyle;
+          const pre = document.getElementById("style-text");
+          pre.scrollTop = pre.scrollHeight;
+
+          // Activar todas las animaciones inmediatamente
+          startECG();
+        }, 2 * commentTime);
+      }
+
+      // ====================
+      // REPRODUCTOR DE MÚSICA
+      // ====================
+      const songs = [
+        { title: "Canción 1.mp3", file: "song1.mp3" },
+        { title: "Canción 2.mp3", file: "song2.mp3" },
+        { title: "Canción 3.mp3", file: "song3.mp3" },
+        { title: "Canción 4.mp3", file: "song4.mp3" },
+      ];
+
+      let currentSong = 0;
+      let isPlaying = false;
+      const audio = document.getElementById("audio-player");
+      const playBtn = document.getElementById("play-btn");
+      const songTitle = document.getElementById("song-title");
+      const volumeSlider = document.getElementById("volume-slider");
+
+      function loadSong(index) {
+        audio.src = songs[index].file;
+        songTitle.textContent = songs[index].title;
+      }
+
+      function togglePlay() {
+        if (isPlaying) {
+          audio.pause();
+          playBtn.textContent = "▶";
+        } else {
+          audio.play().catch(() => {
+            songTitle.textContent = "Sube tus MP3 al proyecto";
+          });
+          playBtn.textContent = "⏸";
+        }
+        isPlaying = !isPlaying;
+      }
+
+      function nextSong() {
+        currentSong = (currentSong + 1) % songs.length;
+        loadSong(currentSong);
+        if (isPlaying) audio.play();
+      }
+
+      function prevSong() {
+        currentSong = (currentSong - 1 + songs.length) % songs.length;
+        loadSong(currentSong);
+        if (isPlaying) audio.play();
+      }
+
+      document.getElementById("play-btn").addEventListener("click", togglePlay);
+      document.getElementById("next-btn").addEventListener("click", nextSong);
+      document.getElementById("prev-btn").addEventListener("click", prevSong);
+
+      volumeSlider.addEventListener("input", (e) => {
+        audio.volume = e.target.value / 100;
+      });
+
+      audio.addEventListener("ended", nextSong);
+      audio.volume = 0.7;
+      loadSong(0);
+
+      // ====================
+      // ANIMACIÓN ECG
+      // ====================
+      let ecgAnimationRunning = false;
+
+      function startECG() {
+        if (ecgAnimationRunning) return;
+        ecgAnimationRunning = true;
+
+        const container = document.getElementById("ecg-container");
+        const path = document.getElementById("ecg-path");
+
+        if (!path) {
+          console.error("ECG path not found");
+          return;
+        }
+
+        let x = 0;
+        const width = 600;
+        const centerY = 100;
+
+        function animateECG() {
+          if (!ecgAnimationRunning) return;
+
+          x = (x + 3) % width;
+
+          let pathData = `M0,${centerY}`;
+          for (let i = 0; i <= width; i += 3) {
+            const pos = (i + x) % width;
+            let y = centerY;
+
+            const cycle = pos % 300;
+            if (cycle >= 0 && cycle < 10) {
+              y = centerY;
+            } else if (cycle >= 10 && cycle < 20) {
+              y = centerY - 5;
+            } else if (cycle >= 20 && cycle < 30) {
+              y = centerY - 50;
+            } else if (cycle >= 30 && cycle < 40) {
+              y = centerY + 70;
+            } else if (cycle >= 40 && cycle < 50) {
+              y = centerY - 25;
+            } else if (cycle >= 50 && cycle < 60) {
+              y = centerY + 10;
+            } else if (cycle >= 60 && cycle < 70) {
+              y = centerY;
+            } else {
+              y = centerY;
+            }
+
+            pathData += ` L${i},${y}`;
+          }
+
+          try {
+            path.setAttribute("d", pathData);
+          } catch (e) {
+            console.error("Error setting path:", e);
+            ecgAnimationRunning = false;
+            return;
+          }
+
+          requestAnimationFrame(animateECG);
+        }
+
+        animateECG();
+      }
+
+      // ====================
+      // GALERÍA POLAROID
+      // ====================
+      function initPolaroidGallery() {
+        const polaroids = document.querySelectorAll(".polaroid");
+        const prevBtn = document.getElementById("polaroid-prev");
+        const nextBtn = document.getElementById("polaroid-next");
+        let activeIndex = -1;
+
+        function showNavigationButtons() {
+          prevBtn.classList.add("visible");
+          nextBtn.classList.add("visible");
+        }
+
+        function hideNavigationButtons() {
+          prevBtn.classList.remove("visible");
+          nextBtn.classList.remove("visible");
+        }
+
+        function activatePolaroid(index) {
+          polaroids.forEach((p) => p.classList.remove("active"));
+          polaroids[index].classList.add("active");
+          activeIndex = index;
+          showNavigationButtons();
+        }
+
+        function deactivatePolaroid() {
+          polaroids.forEach((p) => p.classList.remove("active"));
+          activeIndex = -1;
+          hideNavigationButtons();
+        }
+
+        function goToPrevious() {
+          if (activeIndex === -1) return;
+          const newIndex =
+            (activeIndex - 1 + polaroids.length) % polaroids.length;
+          activatePolaroid(newIndex);
+        }
+
+        function goToNext() {
+          if (activeIndex === -1) return;
+          const newIndex = (activeIndex + 1) % polaroids.length;
+          activatePolaroid(newIndex);
+        }
+
+        // Click en polaroid
+        polaroids.forEach((polaroid, index) => {
+          polaroid.addEventListener("click", function (e) {
+            e.stopPropagation();
+
+            // Si ya está activa, cerrarla
+            if (activeIndex === index) {
+              deactivatePolaroid();
+            } else {
+              activatePolaroid(index);
+            }
+          });
+        });
+
+        // Botones de navegación
+        prevBtn.addEventListener("click", function (e) {
+          e.stopPropagation();
+          goToPrevious();
+        });
+
+        nextBtn.addEventListener("click", function (e) {
+          e.stopPropagation();
+          goToNext();
+        });
+
+        // Cerrar al hacer click fuera
+        document.addEventListener("click", function (e) {
+          if (
+            activeIndex !== -1 &&
+            !e.target.closest(".polaroid") &&
+            !e.target.closest(".polaroid-nav")
+          ) {
+            deactivatePolaroid();
+          }
+        });
+
+        // Navegar con teclas de flecha
+        document.addEventListener("keydown", function (e) {
+          if (activeIndex === -1) return;
+
+          if (e.key === "ArrowLeft") {
+            goToPrevious();
+          } else if (e.key === "ArrowRight") {
+            goToNext();
+          } else if (e.key === "Escape") {
+            deactivatePolaroid();
+          }
+        });
+      }
+
+      // ====================
+      // INICIALIZACIÓN
+      // ====================
+      document.getElementById("skipAnimation").addEventListener("click", skip);
+
+      // Iniciar la animación después de un breve delay
+      setTimeout(() => {
+        writeStyles(styles, 0, commentTime);
+      }, 500);
+
+      // Inicializar galería polaroid
+      initPolaroidGallery();
+    </script>
+  </body>
+</html>
