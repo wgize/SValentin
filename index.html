@@ -83,7 +83,86 @@
     </style>
   </head>
   <body>
-    <style id="style-tag"></style>
+    <style id="style-tag">
+      /* ===== BOTONES FLOTANTES SUTILES ===== */
+      .skip-link {
+        position: fixed !important;
+        bottom: 15px !important;
+        top: auto !important;
+        z-index: 99999 !important;
+        background: rgba(30, 30, 30, 0.7) !important;
+        color: rgba(255, 255, 255, 0.9) !important;
+        padding: 8px 16px !important;
+        border-radius: 20px !important;
+        font-size: 13px !important;
+        font-weight: normal !important;
+        text-decoration: none !important;
+        border: 1px solid rgba(255, 255, 255, 0.2) !important;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+        backdrop-filter: blur(4px) !important;
+        -webkit-backdrop-filter: blur(4px) !important;
+        pointer-events: auto !important;
+        cursor: pointer !important;
+        -webkit-tap-highlight-color: transparent !important;
+        transition: all 0.2s ease !important;
+        letter-spacing: 0.5px !important;
+        line-height: 1 !important;
+        white-space: nowrap !important;
+      }
+
+      .skip-link:hover,
+      .skip-link:active {
+        background: rgba(50, 50, 50, 0.9) !important;
+        border-color: rgba(255, 255, 255, 0.3) !important;
+        transform: scale(0.98) !important;
+      }
+
+      #skipAnimation {
+        left: 15px !important;
+        right: auto !important;
+      }
+
+      #danceButton {
+        right: 15px !important;
+        left: auto !important;
+      }
+
+      /* ===== PROTECCIÓN EXTRA ===== */
+      #dance-overlay {
+        pointer-events: none;
+      }
+
+      #dance-overlay div {
+        pointer-events: auto;
+      }
+
+      /* ===== RESPONSIVE ===== */
+      @media (max-width: 768px) {
+        .skip-link {
+          padding: 7px 14px !important;
+          font-size: 12px !important;
+          bottom: 12px !important;
+          backdrop-filter: blur(4px) !important;
+          -webkit-backdrop-filter: blur(4px) !important;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .skip-link {
+          padding: 6px 12px !important;
+          font-size: 11px !important;
+          bottom: 10px !important;
+        }
+
+        #skipAnimation {
+          left: 10px !important;
+        }
+
+        #danceButton {
+          right: 10px !important;
+        }
+      }
+    </style>
 
     <div id="ecg-container">
       <div id="ecg-line"></div>
@@ -93,24 +172,67 @@
     </div>
 
     <span id="echo"></span>
-    <span id="heart"><i></i></span>
+    <span id="heart">
+      <i></i>
+      <!-- Gon y Killua -->
+      <div id="characters">
+        <!-- Gon (izquierda) -->
+        <div id="gon">
+          <div class="gon-hair-back"></div>
+          <div class="gon-head"></div>
+          <div class="gon-hair-spikes">
+            <div class="spike spike-1"></div>
+            <div class="spike spike-2"></div>
+            <div class="spike spike-3"></div>
+            <div class="spike spike-4"></div>
+            <div class="spike spike-5"></div>
+          </div>
+          <div class="gon-body"></div>
+          <div class="gon-collar"></div>
+        </div>
+        <!-- Killua (derecha) -->
+        <div id="killua">
+          <div class="killua-hair-back"></div>
+          <div class="killua-head"></div>
+          <div class="killua-hair-spikes">
+            <div class="k-spike k-spike-1"></div>
+            <div class="k-spike k-spike-2"></div>
+            <div class="k-spike k-spike-3"></div>
+            <div class="k-spike k-spike-4"></div>
+            <div class="k-spike k-spike-5"></div>
+            <div class="k-spike k-spike-6"></div>
+          </div>
+          <div class="killua-body"></div>
+          <div class="killua-collar"></div>
+        </div>
+      </div>
+    </span>
 
     <div id="polaroid-gallery">
       <div class="polaroid" data-index="0">
         <img src="photo1.jpg" alt="Foto 1" />
-        <div class="polaroid-caption">Tomando te macho</div>
+        <div class="polaroid-caption">
+          Tomando te macho, es dificil sacarte una foto
+        </div>
       </div>
       <div class="polaroid" data-index="1">
         <img src="photo2.jpg" alt="Foto 2" />
-        <div class="polaroid-caption">Por qué todo es tomar?</div>
+        <div class="polaroid-caption">
+          Por qué todo es tomar? a veces me siento mala influencia xd
+        </div>
       </div>
       <div class="polaroid" data-index="2">
         <img src="photo3.jpg" alt="Foto 3" />
-        <div class="polaroid-caption">Día de jalouin</div>
+        <div class="polaroid-caption">
+          Día de jalouin. Alguno reconoció que eras Fredy ? xdxd
+        </div>
       </div>
       <div class="polaroid" data-index="3">
         <img src="photo4.jpg" alt="Foto 4" />
-        <div class="polaroid-caption">Mejor una foto tuya xd</div>
+        <div class="polaroid-caption">
+          Mejor una foto tuya xd (captura) porque todas las que envías son para
+          una vez :c
+        </div>
       </div>
       <button class="polaroid-nav polaroid-nav-prev" id="polaroid-prev">
         ‹
@@ -121,7 +243,6 @@
     </div>
 
     <pre id="style-text"></pre>
-
     <div id="music-player">
       <button class="player-btn" id="prev-btn">⏮</button>
       <button class="player-btn" id="play-btn">▶</button>
@@ -136,7 +257,53 @@
     <audio id="audio-player"></audio>
 
     <a class="skip-link" id="skipAnimation">Saltar intro xd</a>
+    <a class="skip-link" id="danceButton" style="left: 150px"
+      >Baila si odias a Keny</a
+    >
 
+    <!-- Overlay para el GIF de bailar -->
+    <div
+      id="dance-overlay"
+      style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.85);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        opacity: 0;
+        transition: opacity 0.5s ease;
+      "
+    >
+      <div
+        style="
+          max-width: 500px;
+          width: 90%;
+          background: white;
+          padding: 20px;
+          border-radius: 10px;
+          text-align: center;
+        "
+      >
+        <h2 style="color: #333; margin-bottom: 15px">Baila si odias a Keny</h2>
+        <div
+          class="tenor-gif-embed"
+          data-postid="18342081590163558723"
+          data-share-method="host"
+          data-aspect-ratio="0.926316"
+          data-width="100%"
+        >
+          <a
+            href="https://tenor.com/view/dancing-dog-cute-dog-gif-18342081590163558723"
+            >Dancing Dog GIF</a
+          >
+        </div>
+      </div>
+    </div>
     <script>
       // ====================
       // CSS COMPLETO PARA COMPILAR
@@ -148,75 +315,13 @@
 
 /*
  * ...¿hola?
- * ¡Hola a Luz! ¡Soy  ̶K̶e̶n̶y̶! Wendel xd
+ * ¡Hola Luz! ¡Soy  ̶K̶e̶n̶y̶! Wendel xd
  * Se acerca San Valentín y no sabía que regalarte 
  * o si tan solo recibirías regalo :D
  * Así que decidí hacer algo especial para ti~
- * hecho con código y mucho cariño.
- * Y a falta de animación, será entretenido que veas
- * lo que realmente se hace al digitar código ajsdjsadj
- * que lo disfruteeeeeees !! 
- * Primero, hagamos un buen formato
- * para el código xd 
- */
+ * espera espera, falta música no?
+ * déjame arreglarlo ...
 
-pre em:not(.comment) { font-style: normal; }
-
-.comment       { color: #707e84; }
-.selector      { color: #c66c75; }
-.selector .key { color: #c66c75; }
-.key           { color: #c7ccd4; }
-.value         { color: #d5927b; }
-
-@media screen and (max-width: 768px) {
-    pre { left: 6%;right: 6%;top: 50%; }
-}
-
-@media screen and (min-width: 768px) {
-    pre { width: 48%;left: 50%;bottom: 30px; }
-}
-
-/*
- * ¡Espera otra vez ! xxxdxd
- * olvidé que programar podría aburrirte
- * mejor sólo resaltemos los mensajes
- */
-
-pre em:not(.comment) { 
-  font-style: normal; 
-  opacity: 1;  
-  filter: blur(0px); 
-  transition: opacity 0.3s ease;
-}
-.comment { 
-  color: #ffb6c1;  
-  opacity: 1 !important; 
-  font-weight: 500; 
-  text-shadow: 0 0 10px rgba(255, 182, 193, 0.3); 
-  background: rgba(255, 182, 193, 0.1); 
-  padding: 2px 4px;
-  border-radius: 3px;
-  display: inline-block;
-}
-
-.selector      { color: #707e84; }
-.selector .key { color: #707e84; }
-.key           { color: #707e84; }
-.value         { color: #707e84; }
-
-
-/*
- * ¡ESTO ES LO QUE IMPORTA! 
- * ahora si no hay excusas de no entiendo nadaaa xd
- * primero, se te puede hacer aburrido esperar 
- * a que escriba todo el código
- * ... ya sé. escucha algo de tu música mientras
- * escribo el resto
- */
-
- /*
- * Ahora el reproductor de música~
- * ¡Para que escuches tus canciones favoritas! 🎵
  */
 /* -------------------------------*/
  
@@ -282,6 +387,7 @@ pre em:not(.comment) {
  /*
  * No conseguiste darle play? xd
  * ¡No te preocupes! en un toque lo arreglo
+ * te invitaría vino pero no sé programar eso asdsa
  */
 /* -------------------------------*/
 #volume-slider::-webkit-slider-thumb {
@@ -342,7 +448,72 @@ pre em:not(.comment) {
 * No sonó? jasjdas lo siento
 * tienes que darle play . . .
  * No seas tímida, dale play gogo~ 
+ * hecho con código y mucho cariño.
+ * Y a falta de animación, será entretenido que veas
+ * lo que realmente se hace al digitar código ajsdjsadj
+ * que lo disfruteeeeeees !! 
  */
+
+ /* . . . . . . . . . . . . .*/
+
+ /*
+ * Primero, hagamos un buen formato
+ * para el código xd 
+ */
+
+pre em:not(.comment) { font-style: normal; }
+
+.comment       { color: #707e84; }
+.selector      { color: #c66c75; }
+.selector .key { color: #c66c75; }
+.key           { color: #c7ccd4; }
+.value         { color: #d5927b; }
+
+@media screen and (max-width: 768px) {
+    pre { left: 6%;right: 6%;top: 50%; }
+}
+
+@media screen and (min-width: 768px) {
+    pre { width: 48%;left: 50%;bottom: 30px; }
+}
+
+/*
+ * ¡Espera otra vez ! xxxdxd
+ * olvidé que programar podría aburrirte
+ * mejor sólo resaltemos los mensajes
+ */
+
+pre em:not(.comment) { 
+  font-style: normal; 
+  opacity: 1;  
+  filter: blur(0px); 
+  transition: opacity 0.3s ease;
+}
+.comment { 
+  color: #ffb6c1;  
+  opacity: 1 !important; 
+  font-weight: 500; 
+  text-shadow: 0 0 10px rgba(255, 182, 193, 0.3); 
+  background: rgba(255, 182, 193, 0.1); 
+  padding: 2px 4px;
+  border-radius: 3px;
+  display: inline-block;
+}
+
+.selector      { color: #707e84; }
+.selector .key { color: #707e84; }
+.key           { color: #707e84; }
+.value         { color: #707e84; }
+
+
+/*
+ * ahora si no hay excusas de no entiendo nadaaa xd
+ * aburrido ?
+ * es fácil aburrirte -.- pero no importa
+ * No hay rosa sin espinas jasjdsajd
+ */
+
+ 
 /* -------------------------------*/
 /*
  * ¡Hagamos un pequeño corazón con código!
@@ -483,6 +654,283 @@ pre em:not(.comment) {
   text-shadow: -1px -1px 0px rgba(0,0,0,0.2);
 }
 
+
+/*
+ * ¡Espera! ¿Qué tal si agregamos algo más especial?
+ * ¿Te acuerdas de Hunter x Hunter?
+ * Vamos a dibujar a Gon y Killua con CSS puro~
+ * ¡Prepárate para ver la magia del código!
+ */
+
+#characters {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: -30px;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 100px;
+  z-index: 10;
+}
+
+/*
+ * Primero dibujemos a Gon
+ * Empezamos con su cabeza...
+ */
+
+#gon {
+  position: relative;
+  width: 60px;
+  height: 90px;
+  transform: scale(0.8);
+}
+
+.gon-head {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background: #ffd4c4;
+  border-radius: 50%;
+  top: 15px;
+  left: 5px;
+  z-index: 3;
+}
+
+/*
+ * Ahora su cabello negro puntiagudo...
+ */
+
+.gon-hair-back {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 30px solid transparent;
+  border-right: 30px solid transparent;
+  border-bottom: 45px solid #2d4a2e;
+  top: -5px;
+  left: 0;
+  z-index: 2;
+  transform: rotate(0deg);
+}
+
+.gon-hair-spikes {
+  position: absolute;
+  width: 100%;
+  height: 60px;
+  top: -10px;
+  left: 0;
+  z-index: 4;
+}
+
+.spike {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 25px solid #2d4a2e;
+}
+
+.spike-1 {
+  top: 0;
+  left: 10px;
+  transform: rotate(-20deg);
+  border-bottom-width: 30px;
+}
+
+.spike-2 {
+  top: -5px;
+  left: 22px;
+  transform: rotate(-5deg);
+  border-bottom-width: 35px;
+}
+
+.spike-3 {
+  top: -5px;
+  left: 34px;
+  transform: rotate(5deg);
+  border-bottom-width: 35px;
+}
+
+.spike-4 {
+  top: 0;
+  left: 46px;
+  transform: rotate(20deg);
+  border-bottom-width: 30px;
+}
+
+.spike-5 {
+  top: 5px;
+  left: 28px;
+  transform: rotate(0deg);
+  border-bottom-width: 28px;
+  z-index: 5;
+}
+
+/*
+ * Y su chaqueta verde característica~
+ */
+
+.gon-body {
+  position: absolute;
+  width: 55px;
+  height: 35px;
+  background: #5cb85c;
+  border-radius: 8px 8px 15px 15px;
+  top: 55px;
+  left: 2px;
+  z-index: 2;
+}
+
+.gon-collar {
+  position: absolute;
+  width: 50px;
+  height: 12px;
+  background: #d9534f;
+  border-radius: 3px;
+  top: 55px;
+  left: 5px;
+  z-index: 3;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/*
+ * xd no convence ? Ahora dibujemos a Killua
+ * (el de cabello plateado)
+ */
+
+#killua {
+  position: relative;
+  width: 60px;
+  height: 90px;
+  transform: scale(0.8);
+}
+
+.killua-head {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background: #f5ebe0;
+  border-radius: 50%;
+  top: 15px;
+  left: 5px;
+  z-index: 3;
+}
+
+/*
+ * Su cabello plateado despeinado...
+ */
+
+.killua-hair-back {
+  position: absolute;
+  width: 65px;
+  height: 55px;
+  background: #d4d4d4;
+  border-radius: 50% 50% 40% 40%;
+  top: -8px;
+  left: -3px;
+  z-index: 2;
+}
+
+.killua-hair-spikes {
+  position: absolute;
+  width: 100%;
+  height: 60px;
+  top: -15px;
+  left: 0;
+  z-index: 4;
+}
+
+.k-spike {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-bottom: 22px solid #e0e0e0;
+}
+
+.k-spike-1 {
+  top: -5px;
+  left: 5px;
+  transform: rotate(-35deg);
+  border-bottom-width: 28px;
+}
+
+.k-spike-2 {
+  top: -8px;
+  left: 16px;
+  transform: rotate(-15deg);
+  border-bottom-width: 32px;
+}
+
+.k-spike-3 {
+  top: -10px;
+  left: 28px;
+  transform: rotate(0deg);
+  border-bottom-width: 35px;
+  z-index: 5;
+}
+
+.k-spike-4 {
+  top: -8px;
+  left: 40px;
+  transform: rotate(15deg);
+  border-bottom-width: 32px;
+}
+
+.k-spike-5 {
+  top: -5px;
+  left: 51px;
+  transform: rotate(35deg);
+  border-bottom-width: 28px;
+}
+
+.k-spike-6 {
+  top: 0px;
+  left: 34px;
+  transform: rotate(-5deg);
+  border-bottom-width: 25px;
+  opacity: 0.8;
+}
+
+/*
+ * Y su camiseta gris/morada~
+ */
+
+.killua-body {
+  position: absolute;
+  width: 55px;
+  height: 35px;
+  background: #9b9b9b;
+  border-radius: 8px 8px 15px 15px;
+  top: 55px;
+  left: 2px;
+  z-index: 2;
+}
+
+.killua-collar {
+  position: absolute;
+  width: 50px;
+  height: 12px;
+  background: #7d7d7d;
+  border-radius: 3px;
+  top: 55px;
+  left: 5px;
+  z-index: 3;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.15);
+}
+
+/* mejor quitamos todo xd no me sale pipipi */
+/* ---------------------------------------- */
+
+#characters {
+  opacity: 0;
+  transition: opacity 2s ease-in;
+}
+
 /*
  * Está muy frío xd si parece tu corazon
  * ¡Hagamos que este corazón lata!
@@ -517,6 +965,18 @@ pre em:not(.comment) {
   }
 }
 
+/*
+ * Yapeando a Luz para que desbloquee
+ * ... Saldo insuficiente? 
+ */
+/* -------------------------------*/
+
+
+/*
+ * ajsdjsajdaj bueno, a ella no le gusta que gaste
+ * ... me desbloqueó ?
+ */
+/* -------------------------------*/
 @keyframes echo {
   0%   {
     opacity: 0.1;
@@ -529,8 +989,9 @@ pre em:not(.comment) {
 }
 
 /*
- * ¡Bien! Ahora haremos que lata x2
+ * ¡Bien! el corazóncito empieza   a latir xdxd
  */
+/* -------------------------------*/
 
 #heart, #echo {
   -webkit-animation-duration: 2000ms;
@@ -562,7 +1023,7 @@ pre em:not(.comment) {
 /*
  * revisando tu chat ...
  */
-
+/* -------------------------------*/
 #heart, #echo {
 
 /*
@@ -684,9 +1145,17 @@ pre em:not(.comment) {
   box-shadow: 0 20px 40px rgba(0,0,0,0.5);
 }
 
+/*
+ * Paciencia paciencia ...
+ */
+/* -------------------------------*/
 
+/*
+ * Lo bueno demora en llegar
+ */
+/* -------------------------------*/
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1440px) {
   .polaroid {
     width: 100px;
     padding: 8px;
@@ -701,6 +1170,11 @@ pre em:not(.comment) {
     font-size: 9px;
     margin-top: 6px;
   }
+
+/*
+ * O en empezar una relación ajsdjsad
+ */
+/* -------------------------------*/
   
   .polaroid:nth-child(1) {
     transform: rotate(-8deg) translateX(-40px);
@@ -724,7 +1198,12 @@ pre em:not(.comment) {
 }
 
 /*
- * Botones de navegación para las fotos
+ * Algunos botones que verás después
+ */
+/* -------------------------------*/
+
+/*
+ * Por cierto, se ve sencillo no ?
  */
 /* -------------------------------*/
 .polaroid-nav {
@@ -785,7 +1264,43 @@ pre em:not(.comment) {
   }
 }
 
-@media screen and (min-width: 768px) {
+/* -------------------------------*/
+/*
+ * Ya casi ...
+ */
+/* -------------------------------*/
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    .polaroid-nav {
+    width: 50px;
+    height: 50px;
+    font-size: 36px;
+  }
+  
+  .polaroid-nav-prev {
+    left: 10px;
+  }
+  
+  .polaroid-nav-next {
+    right: 420px;
+  }
+}
+
+@media screen and (min-width: 1024px  ) and (max-width: 1440px) {
+    .polaroid-nav {
+    width: 50px;
+    height: 50px;
+    font-size: 36px;
+  }
+  
+  .polaroid-nav-prev {
+    left: 10px;
+  }
+  
+  .polaroid-nav-next {
+    right: 0px;
+  }
+}
+@media screen and (min-width: 1440px  ) {
     .polaroid-nav {
     width: 50px;
     height: 50px;
@@ -800,21 +1315,50 @@ pre em:not(.comment) {
     right: 1000px;
   }
 }
-
 /*
  * ¡Ya están listas las fotos!
+ * Pero antes de mostrarlas quiero terminar mi mensaje
+ * No te preocupes, no es tan largo como parece xd
+ * uhmmm
+ * primero, disculpa la calidad de la música xd 
+ * no respondiste la noche en la que te pedí el top 4 jxjasdj
+ * me dí cuenta que estaba bloqueado xd
+ * sólo no quiero que la historia se repita
+ * así que siéntete libre de decirme 
+ * lo que te molesta antes de hacer esas cosas
+ * /
+ /* ------------------*/
+ /*
+ * Eres alguien muy especial para mí
+ * y este es un intento por demostrártelo
+ * tienes poca paciencia y no le gusta el show
+ * pero genial en otros sentidos xd
+ * déjame el show a mí
+ * /
+ /* ------------------*/
+ /*
+ * nunca te sientas obligada a nada
+ * cualquier decisión que tomes
+ * tiene sentido mientras te haga feliz
+ * y si no es así, también está bien
+ * rajaremos juntos tomando tecitos de eso xd
+ * /
+/* ------------------*/
+/*
+ * diviértete hoy (o mañana si es viernes)
+ * se te quiere mucho !!
+ * así que cuida ese corazoncito 
+ * o lo vengaré yo jasjdsaj
  */
-
+/* ------------------*/
 #polaroid-gallery {
   opacity: 1;
 }
 
-/*
- * ¡asdasd
- */
+
 
 /*
- * Feliz San Valentín, Luz~ 
+ * Feliz San Valentín, Luz <3
  * Y baila si odias a keny xd
  */`;
 
@@ -828,7 +1372,7 @@ pre em:not(.comment) {
       let styleTag = document.getElementById("style-tag");
       let styleText = document.getElementById("style-text");
 
-      const commentTime = 35; // Tiempo para comentarios (más lento para leer)
+      const commentTime = 55; // Tiempo para comentarios (más lento para leer)
       const codeTime = 0.2; // Tiempo para código
 
       function writeStyleChar(char) {
@@ -909,10 +1453,11 @@ pre em:not(.comment) {
       // REPRODUCTOR DE MÚSICA
       // ====================
       const songs = [
-        { title: "Canción 1.mp3", file: "song1.mp3" },
-        { title: "Canción 2.mp3", file: "song2.mp3" },
-        { title: "Canción 3.mp3", file: "song3.mp3" },
-        { title: "Canción 4.mp3", file: "song4.mp3" },
+        { title: "Sign of the Times", file: "song2.mp3" },
+        { title: "Selfless", file: "song5" },
+        { title: "When I Was Your Man", file: "song3.mp3" },
+        { title: "I Won't Give Up", file: "song4.mp3" },
+        { title: "Kiss me", file: "song1.mp3" },
       ];
 
       let currentSong = 0;
@@ -1125,12 +1670,46 @@ pre em:not(.comment) {
           }
         });
       }
+      // ====================
+      // BOTÓN "BAILA SI ODIAS A KENY"
+      // ====================
+      function showDanceGif() {
+        const overlay = document.getElementById("dance-overlay");
+        overlay.style.display = "flex";
 
+        // Fade in
+        setTimeout(() => {
+          overlay.style.opacity = "1";
+        }, 10);
+
+        // Cargar el script de Tenor si no está cargado
+        if (!window.TenorEmbed) {
+          const script = document.createElement("script");
+          script.src = "https://tenor.com/embed.js";
+          script.async = true;
+          document.body.appendChild(script);
+        } else {
+          // Si ya está cargado, recargar los embeds
+          if (window.TenorEmbed.renderAll) {
+            window.TenorEmbed.renderAll();
+          }
+        }
+
+        // Auto-cerrar después de 5 segundos
+        setTimeout(() => {
+          overlay.style.opacity = "0";
+          setTimeout(() => {
+            overlay.style.display = "none";
+          }, 500);
+        }, 5000);
+      }
       // ====================
       // INICIALIZACIÓN
       // ====================
       document.getElementById("skipAnimation").addEventListener("click", skip);
-
+      document
+        .getElementById("danceButton")
+        .addEventListener("click", showDanceGif);
       // Iniciar la animación después de un breve delay
       setTimeout(() => {
         writeStyles(styles, 0, commentTime);
@@ -1139,5 +1718,7 @@ pre em:not(.comment) {
       // Inicializar galería polaroid
       initPolaroidGallery();
     </script>
+    <!-- Script de Tenor para cargar el GIF -->
+    <script async src="https://tenor.com/embed.js"></script>
   </body>
 </html>
