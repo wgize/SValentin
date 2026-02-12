@@ -209,6 +209,13 @@
       <button class="polaroid-nav polaroid-nav-next" id="polaroid-next">
         ›
       </button>
+      <button
+        class="polaroid-toggle"
+        id="polaroid-toggle"
+        title="Minimizar/Maximizar fotos"
+      >
+        <span class="toggle-icon">−</span>
+      </button>
     </div>
 
     <pre id="style-text"></pre>
@@ -226,9 +233,7 @@
     <audio id="audio-player"></audio>
 
     <a class="skip-link" id="skipAnimation">Saltar intro xd</a>
-    <a class="skip-link" id="danceButton" style="left: 150px"
-      >Baila si odias a Keny</a
-    >
+    <a class="skip-link" id="danceButton">Baila si odias a Keny</a>
 
     <!-- Overlay para el GIF de bailar -->
     <div
@@ -278,6 +283,66 @@
       // CSS COMPLETO PARA COMPILAR
       // ====================
       const styles = `/*
+ * Primero, hagamos un buen formato
+ * para el código xd 
+ */
+
+pre em:not(.comment) { font-style: normal; }
+
+.comment       { color: #707e84; }
+.selector      { color: #c66c75; }
+.selector .key { color: #c66c75; }
+.key           { color: #c7ccd4; }
+.value         { color: #d5927b; }
+
+@media screen and (max-width: 768px) {
+    pre { left: 6%;right: 6%;top: 50%; }
+}
+
+@media screen and (min-width: 768px) {
+    pre { width: 48%;left: 50%;bottom: 30px; }
+}
+
+/*
+ * ¡Espera otra vez ! xxxdxd
+ * olvidé que programar podría aburrirte
+ * mejor sólo resaltemos los mensajes
+ */
+
+pre em:not(.comment) { 
+  font-style: normal; 
+  opacity: 1;  
+  filter: blur(0px); 
+  transition: opacity 0.3s ease;
+}
+.comment { 
+  color: #ffb6c1;  
+  opacity: 1 !important; 
+  font-weight: 500; 
+  text-shadow: 0 0 10px rgba(255, 182, 193, 0.3); 
+  background: rgba(255, 182, 193, 0.1); 
+  padding: 2px 4px;
+  border-radius: 3px;
+  display: inline-block;
+}
+
+.selector      { color: #707e84; }
+.selector .key { color: #707e84; }
+.key           { color: #707e84; }
+.value         { color: #707e84; }
+
+
+/*
+ * ahora si no hay excusas de no entiendo 
+ * nadaaa xd
+ * aburrido ?
+ * es fácil aburrirte -.- pero no importa
+ * No hay rosa sin espinas jasjdsajd
+ */
+
+ 
+/* -------------------------------*/
+/*
  * "Un pequeño detallito <3"
  * "2026-02-14"
  */
@@ -285,14 +350,27 @@
 /*
  * ...¿hola?
  * ¡Hola Luz! ¡Soy  ̶K̶e̶n̶y̶! Wendel xd
- * Se acerca San Valentín y no sabía que regalarte 
- * o si tan solo recibirías regalo :D
- * Así que decidí hacer algo especial para ti~
+ * Se acerca San Valentín y no sabía que
+ * regalarte 
+ */
+
+ /* -------------------------------*/
+
+ /*
+ * o si tan solo recibirías regalo 
+ * Así que decidí hacer algo especial 
+ * para ti~
+ */
+
+ /* -------------------------------*/
+
+ /*
  * espera espera, falta música no?
  * déjame arreglarlo ...
-
  */
-/* -------------------------------*/
+
+ /* -------------------------------*/
+
  
 #music-player {
   display: flex !important;
@@ -356,7 +434,8 @@
  /*
  * No conseguiste darle play? xd
  * ¡No te preocupes! en un toque lo arreglo
- * te invitaría vino pero no sé programar eso asdsa
+ * te invitaría vino pero 
+ * no sé programar eso asdsa
  */
 /* -------------------------------*/
 #volume-slider::-webkit-slider-thumb {
@@ -437,72 +516,15 @@
 * tienes que darle play . . .
  * No seas tímida, dale play gogo~ 
  * hecho con código y mucho cariño.
- * Y a falta de animación, será entretenido que veas
- * lo que realmente se hace al digitar código ajsdjsadj
+ * Y a falta de animación, 
+ * será entretenido que veas
+ * lo que realmente se hace al 
+ * digitar código ajsdjsadj
  * que lo disfruteeeeeees !! 
  */
 
  /* . . . . . . . . . . . . .*/
 
- /*
- * Primero, hagamos un buen formato
- * para el código xd 
- */
-
-pre em:not(.comment) { font-style: normal; }
-
-.comment       { color: #707e84; }
-.selector      { color: #c66c75; }
-.selector .key { color: #c66c75; }
-.key           { color: #c7ccd4; }
-.value         { color: #d5927b; }
-
-@media screen and (max-width: 768px) {
-    pre { left: 6%;right: 6%;top: 50%; }
-}
-
-@media screen and (min-width: 768px) {
-    pre { width: 48%;left: 50%;bottom: 30px; }
-}
-
-/*
- * ¡Espera otra vez ! xxxdxd
- * olvidé que programar podría aburrirte
- * mejor sólo resaltemos los mensajes
- */
-
-pre em:not(.comment) { 
-  font-style: normal; 
-  opacity: 1;  
-  filter: blur(0px); 
-  transition: opacity 0.3s ease;
-}
-.comment { 
-  color: #ffb6c1;  
-  opacity: 1 !important; 
-  font-weight: 500; 
-  text-shadow: 0 0 10px rgba(255, 182, 193, 0.3); 
-  background: rgba(255, 182, 193, 0.1); 
-  padding: 2px 4px;
-  border-radius: 3px;
-  display: inline-block;
-}
-
-.selector      { color: #707e84; }
-.selector .key { color: #707e84; }
-.key           { color: #707e84; }
-.value         { color: #707e84; }
-
-
-/*
- * ahora si no hay excusas de no entiendo nadaaa xd
- * aburrido ?
- * es fácil aburrirte -.- pero no importa
- * No hay rosa sin espinas jasjdsajd
- */
-
- 
-/* -------------------------------*/
 /*
  * ¡Hagamos un pequeño corazón con código!
  */
@@ -772,7 +794,7 @@ pre em:not(.comment) {
   align-items: center;
   z-index: 9999;
   opacity: 0;
-  transition: opacity 2s ease-in;
+  transition: all 0.5s ease;
 }
 
 @media screen and (max-width: 768px) {
@@ -979,7 +1001,7 @@ pre em:not(.comment) {
 /*
  * Ya casi ...
  */
-/* -------------------------------*/
+/* ------------------------------- */
 @media screen and (min-width: 768px) and (max-width: 1024px) {
     .polaroid-nav {
     width: 50px;
@@ -1026,6 +1048,88 @@ pre em:not(.comment) {
     right: 1000px;
   }
 }
+
+/*
+ * Botón para minimizar o maximizar las fotos
+ * ¡Útil para leer el código en móviles!
+ */
+
+.polaroid-toggle {
+  position: fixed;
+  bottom: 230px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(198, 108, 117, 0.9);
+  border: none;
+  color: white;
+  font-size: 28px;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 9;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  padding: 0;
+}
+
+.polaroid-toggle:hover {
+  background: rgba(198, 108, 117, 1);
+  transform: translateX(-50%) scale(1.1);
+}
+
+.polaroid-toggle:active {
+  transform: translateX(-50%) scale(0.95);
+}
+
+.toggle-icon {
+  display: block;
+  font-weight: bold;
+  user-select: none;
+}
+
+@media screen and (max-width: 768px) {
+  .polaroid-toggle {
+    bottom: 220px;
+    width: 40px;
+    height: 40px;
+    font-size: 24px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .polaroid-toggle {
+    left: calc(25% - 0px);
+    bottom: 230px;
+  }
+}
+
+/*
+ * Estado minimizado de las fotos
+ */
+
+#polaroid-gallery.minimized {
+  bottom: -180px !important;
+  opacity: 0.2 !important;
+}
+
+#polaroid-gallery.minimized:hover {
+  opacity: 0.4 !important;
+}
+
+#polaroid-gallery.minimized .polaroid {
+  transform: scale(0.4) !important;
+  pointer-events: none;
+}
+
+#polaroid-gallery.minimized .polaroid.active {
+  transform: scale(0.4) !important;
+}
+
 /*
  * ¡Ya están listas las fotos!
  * Pero antes de mostrarlas quiero terminar mi mensaje
@@ -1081,7 +1185,7 @@ pre em:not(.comment) {
       let styleTag = document.getElementById("style-tag");
       let styleText = document.getElementById("style-text");
 
-      const commentTime = 55; // Tiempo para comentarios (más lento para leer)
+      const commentTime = 20; // Tiempo para comentarios (más lento para leer)
       const codeTime = 0; // Tiempo para código
 
       function writeStyleChar(char) {
@@ -1378,7 +1482,42 @@ pre em:not(.comment) {
             deactivatePolaroid();
           }
         });
+
+        // ====================
+        // BOTÓN MINIMIZAR/MAXIMIZAR
+        // ====================
+        const toggleBtn = document.getElementById("polaroid-toggle");
+        const gallery = document.getElementById("polaroid-gallery");
+        let isMinimized = false;
+
+        if (toggleBtn) {
+          toggleBtn.addEventListener("click", function (e) {
+            e.stopPropagation();
+            isMinimized = !isMinimized;
+
+            console.log("Toggle clicked! isMinimized:", isMinimized);
+
+            if (isMinimized) {
+              console.log("Minimizando galería...");
+              gallery.classList.add("minimized");
+              toggleBtn.querySelector(".toggle-icon").textContent = "+";
+              toggleBtn.title = "Maximizar fotos";
+              // Cerrar cualquier foto activa
+              deactivatePolaroid();
+            } else {
+              console.log("Maximizando galería...");
+              gallery.classList.remove("minimized");
+              toggleBtn.querySelector(".toggle-icon").textContent = "−";
+              toggleBtn.title = "Minimizar fotos";
+            }
+
+            console.log("Clases actuales:", gallery.className);
+          });
+        } else {
+          console.error("Toggle button no encontrado!");
+        }
       }
+
       // ====================
       // BOTÓN "BAILA SI ODIAS A KENY"
       // ====================
@@ -1404,14 +1543,15 @@ pre em:not(.comment) {
           }
         }
 
-        // Auto-cerrar después de 5 segundos
+        // Auto-cerrar después de 2.5 segundos
         setTimeout(() => {
           overlay.style.opacity = "0";
           setTimeout(() => {
             overlay.style.display = "none";
           }, 500);
-        }, 5000);
+        }, 2500);
       }
+
       // ====================
       // INICIALIZACIÓN
       // ====================
@@ -1419,6 +1559,7 @@ pre em:not(.comment) {
       document
         .getElementById("danceButton")
         .addEventListener("click", showDanceGif);
+
       // Iniciar la animación después de un breve delay
       setTimeout(() => {
         writeStyles(styles, 0, commentTime);
