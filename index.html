@@ -315,15 +315,15 @@ pre em:not(.comment) {
   filter: blur(0px); 
   transition: opacity 0.3s ease;
 }
-.comment { 
-  color: #ffb6c1;  
-  opacity: 1 !important; 
-  font-weight: 500; 
-  text-shadow: 0 0 10px rgba(255, 182, 193, 0.3); 
-  background: rgba(255, 182, 193, 0.1); 
-  padding: 2px 4px;
-  border-radius: 3px;
-  display: inline-block;
+.comment {
+color: #c3b1e1;
+opacity: 1 !important;
+font-weight: 500;
+text-shadow: 0 0 10px rgba(195, 177, 225, 0.3);
+background: rgba(195, 177, 225, 0.1);
+padding: 2px 4px;
+border-radius: 3px;
+display: inline-block;
 }
 
 .selector      { color: #707e84; }
@@ -589,7 +589,7 @@ pre em:not(.comment) {
   left: 0;
   width: 100%;
   height: 1px;
-  background: rgba(198, 108, 117, 0.2);
+  background: rgba(195, 177, 225, 0.2);
 }
 
 .ecg-pulse {
@@ -601,10 +601,10 @@ pre em:not(.comment) {
 }
 
 .ecg-pulse path {
-  stroke: rgba(198, 108, 117, 0.5);
+  stroke: rgba(195, 177, 225, 0.5);
   stroke-width: 2;
   fill: none;
-  filter: drop-shadow(0 0 3px rgba(198, 108, 117, 0.3));
+  filter: drop-shadow(0 0 3px rgba(195, 177, 225, 0.3));
 }
 
 #heart::before, #heart::after, #echo::before, #echo::after {
@@ -612,7 +612,7 @@ pre em:not(.comment) {
     position: absolute;
     top: 40px;
     width: 150px; height: 240px;
-    background: #c66c75;
+    background: #c3b1e1;
     border-radius: 150px 150px 0 0;
     -webkit-transform: rotate(-45deg);
             transform: rotate(-45deg);
@@ -936,7 +936,7 @@ pre em:not(.comment) {
   position: fixed;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(198, 108, 117, 0.9);
+  background: rgba(170, 150, 210, 0.9);
   border: none;
   color: white;
   font-size: 48px;
@@ -957,7 +957,7 @@ pre em:not(.comment) {
 }
 
 .polaroid-nav:hover {
-  background: rgba(198, 108, 117, 1);
+  background: rgba(150, 130, 190, 0.95);
   transform: translateY(-50%) scale(1.1);
 }
 
@@ -1059,7 +1059,7 @@ pre em:not(.comment) {
   bottom: 230px;
   left: 50%;
   transform: translateX(-50%);
-  background: rgba(198, 108, 117, 0.9);
+  background: rgba(170, 150, 210, 0.9);;
   border: none;
   color: white;
   font-size: 28px;
@@ -1068,7 +1068,7 @@ pre em:not(.comment) {
   border-radius: 50%;
   cursor: pointer;
   transition: all 0.3s ease;
-  z-index: 9;
+  z-index: 14;
   box-shadow: 0 4px 15px rgba(0,0,0,0.3);
   display: flex;
   align-items: center;
@@ -1078,7 +1078,7 @@ pre em:not(.comment) {
 }
 
 .polaroid-toggle:hover {
-  background: rgba(198, 108, 117, 1);
+  background: rgba(150, 130, 190, 0.95);
   transform: translateX(-50%) scale(1.1);
 }
 
@@ -1572,4 +1572,3 @@ pre em:not(.comment) {
     <script async src="https://tenor.com/embed.js"></script>
   </body>
 </html>
-
