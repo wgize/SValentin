@@ -368,7 +368,26 @@
   cursor: pointer;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 480px) {
+  #music-player {
+    top: 10px;
+    left: 80px;
+    padding: 10px 15px;
+    gap: 8px;
+  }
+  .volume-control {
+    display: none;
+  }
+  #song-title {
+    min-width: 100px;
+    font-size: 11px;
+  }
+  .player-btn {
+    font-size: 16px;
+    padding: 5px 8px;
+  }
+}
+@media screen and (max-width: 1280px) and (min-width: 480px) {
   #music-player {
     top: 10px;
     left: 120px;
@@ -387,8 +406,7 @@
     padding: 5px 8px;
   }
 }
-
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 1280px) {
     #music-player {
     top: 30px;
     left: 300px;
@@ -724,23 +742,10 @@ pre em:not(.comment) {
  * ...2...
  *
  * ...1...
- *
- * ¡ Luz respondió un mensaje! xd
- *
  */
 /* -------------------------------*/
   -webkit-animation-play-state: running;
           animation-play-state: running;
-
-/*
- * ¡¡Aquí viene!
- */
-
-}
-
-/*
- * Ahora sí~ ¡todo cobra vida!
- */
 
 #ecg-container {
   opacity: 1;
@@ -1147,7 +1152,7 @@ pre em:not(.comment) {
       const songs = [
         { title: "Sign of the Times", file: "song1.mp3" },
         { title: "Kiss me", file: "song2.mp3" },
-        { title: "Selfless", file: "song3" },
+        { title: "Selfless", file: "song3.mp3" },
         { title: "When I Was Your Man", file: "song4.mp3" },
         { title: "I Won't Give Up", file: "song5.mp3" },
       ];
